@@ -1,5 +1,56 @@
 { lib, config, ... }: with lib;
 {
+	system.os = {
+		hostname = mkOption {
+			type = types.str;
+			default = "nixos";
+		};
+		bootloader = {
+			loader = mkOption {
+				type = types.enum [ "systemd" "grub" ];
+				default = "systemd";
+				description = "bootloader";
+			};
+			canTouchEfiVariables = mkOption {
+				type = types.bool;
+				default = true;
+			};
+		};
+		kernel = {
+			#TODO: add kernel module stuff
+		};
+		network = {
+			useDHCP = mkOption {
+				type = types.bool;
+				default = true;
+				description = "enables DHCP"
+			};
+			enableWifi = mkOption {
+				type = types.bool;
+				default = false;
+			};
+			firewall = {
+				disabled = mkOption {
+					type = types.bool;
+					default = false;
+				};
+				rules = mkOption {
+					type = types.listOf (types.submodule {
+						port = mkOption {
+							type = types.ints.between 0 65535;
+							default = 0;
+						};
+						type = mkOption {
+							type = types.enum [ "TCP" "UDP" "BOTH" ];
+							default = "TCP";
+						};
+					});
+					default = [];
+					description = "firewal rules";
+				};
+			};
+		};
+	};
 	system.hardware = {
 		displays = mkOption {
 			type = types.listOf (types.submodule {
@@ -55,6 +106,11 @@
 				default = "amd";
 				description = "The cpu vendor";
 			};
+			updateMicrcode = mkOption {
+				type = types.bool;
+				default = true;
+				description = "Update microcode";
+			};
 		};
 		gpu = mkOption {
 			type = types.listOf (types.submodule {
@@ -92,6 +148,23 @@
 				type = types.ints.positive;
 				default = 0;
 				description = "size of ram in MiB"; 
+			};
+		};
+		misc = {
+			hasBluetooth = mkOption {
+				type = types.bool;
+				default = false;
+				description = "Has bluetooth";
+			};
+			hasTPM = mkOption {
+				type = types.bool;
+				default = false;
+				description = "Has tpm";
+			};
+			hasWifi = mkOption {
+				type = types.bool;
+				default = false;
+				description = "Has wifi";
 			};
 		};
 		storage = mkOption {
