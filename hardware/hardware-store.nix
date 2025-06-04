@@ -1,6 +1,4 @@
-{ lib, config, ... }:
-
-with lib;
+{ lib, config, ... }: with lib;
 {
 	system.hardware = {
 		displays = mkOption {
@@ -24,6 +22,18 @@ with lib;
 					type = types.float;
 					default = 1.0;
 					description = "Monitor dpi";
+				};
+				position = {
+					x = mkOption {
+						type = types.int;
+						default = 0;
+						description = "X position of display";
+					};
+					y = mkOption {
+						type = types.int;
+						default = 0;
+						description = "Y position of display";
+					};
 				};
 			});
 			default = [];
@@ -58,10 +68,10 @@ with lib;
         				default = "";
         				description = "Optional GPU model name.";
       				};
-      				vramMB = mkOption {
+      				vramMiB = mkOption {
         				type = types.ints.positive;
        	 				default = 0;
-      	  				description = "Amount of GPU VRAM in MB.";
+      	  				description = "Amount of GPU VRAM in MiB.";
      	 			};
      	 			headless = mkOption {
       	  				type = types.bool;
@@ -76,6 +86,70 @@ with lib;
 			});
 			default = [];
 			description = "List of GPUs";
+		};
+		ram = {
+			sizeMiB = mkOption {
+				type = types.ints.positive;
+				default = 0;
+				description = "size of ram in MiB"; 
+			};
+		};
+		storage = mkOption {
+			type = types.listOf (types.submodule {
+				type = mkOption {
+					type = types.enum [ "ssd" "hdd" "flash" ];
+					default = "ssd";
+					description = "Storage type";
+				};
+				sizeGiB = mkOption {
+					type = types.ints.positive;
+					default = 128;
+					description = "Disk size in GiB.";
+				};
+				partitions = mkOption {
+					type = types.listOf (types.submodule {
+						type = mkOption {
+							type = types.enum [ "boot" "swap" "default" ];
+							default = "default";
+							description = "partition type";
+						};						
+						fileSystem = mkOption {
+							type = types.enum [ "ext4" "btrfs" "xfs" "vfat" "ntfs" ];
+							default = "";
+							description = "filesystem type (ignored for swap type partitions)";
+						};
+						sizeGiB = mkOption {
+							type = types.ints.positive;
+							default = 0;
+							description = "size of partition in GiB";
+						};
+						mountPoint = mkOption {
+							type = types.str;
+							description = "Mount point of partition (ignored for swap type partitions)";
+						};
+						label = mkOption {
+							type = types.str;
+							default = "";
+							description = "Partition label (ignored if uid is provided)";
+						};
+						uid = mkOption {
+							type = types.nullOr types.str;
+							default = null;
+							description = "partition uid";
+						};
+						options = mkOption {
+							type = types.listOf( types.str );
+							default = [];
+							description = "disk options such as fmaks and dmask";
+						};
+
+					});
+					default = [];
+					description = "List of partitions";
+				};
+			});
+			default = [];
+			description = "List of disks";
 		};
 	};	
 }
