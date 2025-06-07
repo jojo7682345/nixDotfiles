@@ -11,10 +11,10 @@
 			
 
 			allowedTCPPorts = let
-				tcpRules = lib.filter ( rule: ((rule.type=="TCP")||(rule.type=="BOTH"))) machine.os.network.firewall.rules;
+				tcpRules = lib.filter (rule: ((rule.type=="TCP") || (rule.type=="BOTH"))) machine.os.network.firewall.rules;
 			in map (rule: rule.port) tcpRules;
 			allowedUDPPorts = let
-				udpRules = lib.filter ( rule: ((rule.type=="UDP")||(rule.type="BOTH"))) machine.os.network.firewall.rules;
+				udpRules = lib.filter (rule: ((rule.type=="UDP") || (rule.type="BOTH"))) machine.os.network.firewall.rules;
 			in map (rule: rule.port) udpRules;
 		};
 
