@@ -1,25 +1,5 @@
 {
   "nodes": {
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1748821116,
-        "narHash": "sha256-F82+gS044J1APL0n4hH50GYdPRv/5JWm34oCJYmVKdE=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "49f0870db23e8c1ca0b5259734a02cd9e1e371a1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1748929857,
@@ -38,7 +18,6 @@
     },
     "root": {
       "inputs": {
-        "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs"
       }
     }

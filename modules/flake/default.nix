@@ -1,20 +1,9 @@
-{ inputs, lib, ... }: 
-let
-	inherit (lib.modules) mkIf;
-in
+{ inputs, lib, machine, ... }: 
 {
-	options = {
-		
-	};
+	imports = [
+		./fileSystem.nix
+		./bootloader.nix
+	];
+	system.stateVersion = "25.05";
 
-	config = {
-		boot.loader = {
-			systemd-boot.enable = machine.os.bootloader.loader == "systemd";
-			efi.canTouchEfiVariables = machine.os.bootloader.canTouchEfiVariables;
-		};
-		
-		
-		
-	
-	};	
 }

@@ -1,6 +1,6 @@
-{ lib, config, ... }: with lib;
-{
-	system.os = {
+{ lib, options, ... }: with lib;
+{ options.system = {
+	os = {
 		hostname = mkOption {
 			type = types.str;
 			default = "nixos";
@@ -23,7 +23,7 @@
 			useDHCP = mkOption {
 				type = types.bool;
 				default = true;
-				description = "enables DHCP"
+				description = "enables DHCP";
 			};
 			enableWifi = mkOption {
 				type = types.bool;
@@ -51,9 +51,9 @@
 			};
 		};
 	};
-	system.hardware = {
+	hardware = {
 		displays = mkOption {
-			type = types.listOf (types.submodule {
+			type = types.listOf (types.submodule { options = {
 				port = mkOption {
 					type = types.str;
 					default = "";
@@ -86,14 +86,14 @@
 						description = "Y position of display";
 					};
 				};
-			});
+			};});
 			default = [];
 			description = "List of monitors";
 		};
 		cpu = {
-			numCores = mkOption {
+			cores = mkOption {
 				type = types.ints.positive;
-				default = 4;
+				default = 1;
 				description = "Number of cpu cores";
 			};
 			architecture = mkOption {
@@ -106,14 +106,19 @@
 				default = "amd";
 				description = "The cpu vendor";
 			};
-			updateMicrcode = mkOption {
+			updateMicrocode = mkOption {
 				type = types.bool;
 				default = true;
 				description = "Update microcode";
 			};
+			allowVirtualization = mkOption {
+				type = types.bool;
+				default = false;
+				description = "Allows hardware virtualization";
+			};
 		};
 		gpu = mkOption {
-			type = types.listOf (types.submodule {
+			type = types.listOf (types.submodule {options={
 				vendor = mkOption {
         				type = types.enum [ "nvidia" "amd" "intel" "none" ];
         				default = "none";
@@ -139,7 +144,7 @@
         				default = false;
         				description = "Enable CUDA support (for NVIDIA GPUs).";
       				};
-			});
+			};});
 			default = [];
 			description = "List of GPUs";
 		};
@@ -166,13 +171,32 @@
 				default = false;
 				description = "Has wifi";
 			};
+			usb3ports = mkOption {
+				type = types.ints.positives;
+				default = 1;
+				description = "Number of usb3 ports, defautls to 1 to enable the usb kernel module";
+			};
+			usbPeripherals = mkOption {
+				type = types.bool;
+				default = true;
+				description = "Enable usb peripherals, only disable when you know what you are doing";
+			};
+			allowRemovableStorage = mkOption {
+				type = types.bool;
+				default = true;
+				description = "load the usb storage kernel module";
+			};
 		};
 		storage = mkOption {
-			type = types.listOf (types.submodule {
+			type = types.listOf (types.submodule { options={
 				type = mkOption {
 					type = types.enum [ "ssd" "hdd" "flash" ];
 					default = "ssd";
 					description = "Storage type";
+				};
+				interface = mkOption {
+					type = types.enum ["sata" "nvme" "usb" ];
+					description = "Storage interface";
 				};
 				sizeGiB = mkOption {
 					type = types.ints.positive;
@@ -180,15 +204,15 @@
 					description = "Disk size in GiB.";
 				};
 				partitions = mkOption {
-					type = types.listOf (types.submodule {
+					type = types.listOf (types.submodule { options={
 						type = mkOption {
 							type = types.enum [ "boot" "swap" "default" ];
 							default = "default";
 							description = "partition type";
 						};						
 						fileSystem = mkOption {
-							type = types.enum [ "ext4" "btrfs" "xfs" "vfat" "ntfs" ];
-							default = "";
+							type = types.enum [ "ext4" "btrfs" "xfs" "vfat" "ntfs" "none"];
+							default = "none";
 							description = "filesystem type (ignored for swap type partitions)";
 						};
 						sizeGiB = mkOption {
@@ -216,13 +240,14 @@
 							description = "disk options such as fmaks and dmask";
 						};
 
-					});
+					};});
 					default = [];
 					description = "List of partitions";
 				};
-			});
+			};});
 			default = [];
 			description = "List of disks";
 		};
 	};	
+};
 }
