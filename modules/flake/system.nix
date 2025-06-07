@@ -1,4 +1,4 @@
-{ inputs, machine, lib, ...}:
+{ inputs, pkgs, machine, lib, ...}:
 {
 	#minimal required packages
 	environment.systemPackages = with pkgs; [
