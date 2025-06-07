@@ -1,4 +1,4 @@
-{ config, libs, modulesPath, hardware, ... }:
+{ lib, machine, ... }:
 let
 	inherit (lib.attrsets) genAttrs;
 in

@@ -38,6 +38,7 @@
 			};
 			storage = [{
 				type = "ssd";
+				interface = "nvme";
 				sizeGiB = 2048;
 				partitions = [{
 					type = "boot";
@@ -58,6 +59,7 @@
 				}];
 			} {
 				type = "ssd";
+				interface = "sata";
 				sizeGiB = 512;
 				partitions = [];	
 			}];
