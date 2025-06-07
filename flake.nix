@@ -19,7 +19,7 @@
 			};
 		}) (builtins.filter (f: f != "default.nix" && nixpkgs.lib.hasSuffix ".nix" f) hostFiles));
 	in {
-			nixosConfiguration = hosts;
+			nixosConfigurations = hosts;
 	
 	};	
 
