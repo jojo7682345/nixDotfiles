@@ -19,6 +19,13 @@
 		kernel = {
 			#TODO: add kernel module stuff
 		};
+		time = {
+			timezone = mkOption {
+				type = types.str;
+				default = "";
+				description = "Timezone";
+			};
+		};
 		network = {
 			useDHCP = mkOption {
 				type = types.bool;
@@ -26,6 +33,15 @@
 				description = "enables DHCP";
 			};
 			enableWifi = mkOption {
+				type = types.bool;
+				default = false;
+			};
+			enableTui = mkOption {
+				type = types.bool;
+				default = false;
+				description = "Enables networkmanager";
+			};
+			enableSshAccess = mkOption {
 				type = types.bool;
 				default = false;
 			};

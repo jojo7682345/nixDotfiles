@@ -5,12 +5,18 @@
 	
 	config.system = {
 		os = {
+			hostname = "ilmenite";
 			bootloader = {
 				loader = "systemd";
 				canTouchEfiVariables = true;
 			};
 			network = {
 				enableWifi = true;
+				enableTui = true;
+				enableSshAccess = true;
+			};
+			time = {
+				timezone = "Europe/Amsterdam";
 			};
 		};
 		hardware = {
@@ -35,6 +41,11 @@
 			}];
 			ram = {
 				sizeMiB = 8192;
+			};
+			misc = {
+				hasBluetooth = true;
+				hasWifi = true;
+				usb3ports = 1;
 			};
 			storage = [{
 				type = "ssd";

@@ -1,15 +1,15 @@
 { lib, input, machine, ... } : {
 	
-	hardware.cpu = {
-		
-	}// if machine.hardware.cpu.vendor=="intel" then {
+	hardware.cpu = lib.mkMerge[ 
+	(lib.mkIf (machine.hardware.cpu.vendor=="intel") {
 		intel = {
 			updateMicrocode = machine.hardware.cpu.updateMicrocode;
 		}; 
-	} else if machine.hardware.cpu.vendor=="amd" then {
+	}) 
+	(lib.mkIf (machine.hardware.cpu.vendor=="amd") {
 		amd = {
 			updateMicrocode = machine.hardware.cpu.updateMicrocode;
 		};
-	}
+	})];
 
 }
