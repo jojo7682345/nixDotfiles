@@ -1,5 +1,6 @@
-{ lib, machine, modulesPath, ... }: 
+{ lib, machine, modulesPath, systemStats, ... }: 
 	with machine;
+	with systemStats;
 {
 
 	imports = [ 
@@ -12,10 +13,6 @@
 	};
 
 	boot.initrd.availableKernelModules = let
-		hasSataDrive = (lib.any (disk: disk.interface=="sata") hardware.storage);
-		hasNvmeDrive = (lib.any (disk: disk.interface=="nvme") hardware.storage);
-		hasUsbDrive = (lib.any (disk: disk.interface=="usb") hardware.storage);
-		hasStorage = hardware.storage!=[]||hardware.misc.allowRemovableStorage;
 	in [] ++
 		(lib.optionals hasStorage ["sd_mod"]) ++
 		(lib.optionals hasSataDrive ["ahci"]) ++
