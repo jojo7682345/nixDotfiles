@@ -1,10 +1,8 @@
 { 
 	lib,
 	self,
-	self',
 	config,
 	inputs,
-	inputs',
 	machine,
 	systemStats,	
 	... 
@@ -49,9 +47,7 @@ in
 		extraSpecialArgs = {
 			inherit
 				self
-				self'
 				inputs
-				inputs'
 				machine
 				systemStats
 			;
