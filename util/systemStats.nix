@@ -1,8 +1,6 @@
-{
-	inherit machine;
-	inherit lib;
+{machine, lib}: {
 
-	storageCapabilties = let storage = machine.hardware.storage; in {
+	storageCapabilities = let storage = machine.hardware.storage; in {
 		hasSataDrive = (lib.any (disk: disk.interface=="sata") storage);
 		hasNvmeDrive = (lib.any (disk: disk.interface=="nvme") storage);
 		hasUsbDrive = (lib.any (disk: disk.interface=="usb") storage);

@@ -1,6 +1,5 @@
 { lib, machine, modulesPath, systemStats, ... }: 
 	with machine;
-	with systemStats;
 {
 
 	imports = [ 
@@ -13,11 +12,12 @@
 	};
 
 	boot.initrd.availableKernelModules = let
+		caps = systemStats.storageCapabilities;
 	in [] ++
-		(lib.optionals hasStorage ["sd_mod"]) ++
-		(lib.optionals hasSataDrive ["ahci"]) ++
-		(lib.optionals hasNvmeDrive ["nvme"]) ++
-		(lib.optionals (hasUsbDrive||hardware.misc.allowRemovableStorage) ["usb_storage"]) ++
+		(lib.optionals caps.hasStorage ["sd_mod"]) ++
+		(lib.optionals caps.hasSataDrive ["ahci"]) ++
+		(lib.optionals caps.hasNvmeDrive ["nvme"]) ++
+		(lib.optionals (caps.hasUsbDrive||hardware.misc.allowRemovableStorage) ["usb_storage"]) ++
 		(lib.optionals hardware.misc.usbPeripherals ["usbhid"] );
 	boot.initrd.kernelModules = [];
 
