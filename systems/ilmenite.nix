@@ -68,11 +68,6 @@
 					sizeGiB = 8;
 					uid = "55f82cb7-adc2-4258-969d-dc4b28216efb";
 				}];
-			} {
-				type = "ssd";
-				interface = "sata";
-				sizeGiB = 512;
-				partitions = [];	
 			}];
 		
 		};
