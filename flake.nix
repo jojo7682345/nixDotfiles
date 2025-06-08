@@ -17,7 +17,7 @@
 			value = nixpkgs.lib.nixosSystem {
 				system = "${machine.hardware.cpu.architecture}-linux";
 				specialArgs = { inherit machine; };
-				modules = [ ./modules/flake ];
+				modules = [ ./settings/system ];
 			};
 		}) hostDirs);
 	in {
