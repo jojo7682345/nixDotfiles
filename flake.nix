@@ -3,12 +3,14 @@
 	
 	outputs = { self, nixpkgs, ...}@inputs: 
 	let
-		hostFiles = builtins.attrNames (builtins.readDir ./systems);
+		hostDirs = builtins.filter
+			(name: builtins.pathExists (./systems + "/${name}/default.nix"))
+			(builtins.attrNames (builtins.readDir ./systems));
 		hosts = builtins.listToAttrs ( map (filename:
 		let 
 			
 			machine = (nixpkgs.lib.evalModules {
-				modules = [./systems/${filename}];
+				modules = [./systems/${filename}/default.nix];
 			}).config.system;
 		in {
 			name = nixpkgs.lib.strings.removeSuffix ".nix" filename;
@@ -17,7 +19,7 @@
 				specialArgs = { inherit machine; };
 				modules = [ ./modules/flake ];
 			};
-		}) (builtins.filter (f: f != "default.nix" && nixpkgs.lib.hasSuffix ".nix" f) hostFiles));
+		}) hostDirs);
 	in {
 			nixosConfigurations = hosts;
 	
@@ -27,5 +29,23 @@
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 		
+		lix = {
+			url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+			inputs = {
+				nixpkgs.follows = "nixpkgs";
+				pre-commit-hooks.follows = "";
+				nix2container.follows = "";
+				flake-compat.follows = "";
+			};
+		};
+		
+		home-manager = {
+			type = "github";
+			owner = "nix-community";
+			repo = "home-manager";
+			ref = "pull/4976/merge";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
 	};
 }
