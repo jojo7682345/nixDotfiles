@@ -11,7 +11,7 @@ in
 		name = p.mountPoint;
 		value = {
 			device = let 
-				diskIdentifier = if p.uid == null then "by-uuid/${p.uid}" else "by-label/${p.label}";
+				diskIdentifier = if p.uid != null then "by-uuid/${p.uid}" else "by-label/${p.label}";
 			in "/dev/disk/${diskIdentifier}";
 			fsType = p.fileSystem;
 		} // lib.optionalAttrs (p.options != []) {
@@ -24,7 +24,7 @@ in
 		swaps = lib.filter (p: p.type == "swap") allPartitions;
 	in map (p: {
 		device = let
-			diskIdentifier = if p.uid == null then "by-uuid/${p.uid}" else "by-label/${p.label}";
+			diskIdentifier = if p.uid != null then "by-uuid/${p.uid}" else "by-label/${p.label}";
 		in "/dev/disk/${diskIdentifier}";
 	}) swaps;
 
