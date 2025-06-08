@@ -5,13 +5,13 @@
 	inputs,
 	machine,
 	systemStats,	
+	home-manager,
 	... 
 }:
 let 
 	inherit (lib) genAttrs;
 in
 {
-
 	users.users = builtins.listToAttrs (map (user: {
 		name = user.name;
 		value = {
@@ -35,7 +35,7 @@ in
 			name = user.name;
 			value = {
 				imports = (lib.optionals
-					(builtins.pathExists "${self}/home/${user.name}") 
+					(lib.fileExists "${self}/home/${user.name}") 
 					[ "${self}/home/${user.name}" ]
 				);
 				home.stateVersion = "25.05";
