@@ -1,4 +1,4 @@
-{ lib, ...}: with lib; {
+{lib}: with lib; {
 	displays = mkOption {
 		type = types.listOf (types.submodule { options = {
 			port = mkOption {

@@ -1,4 +1,4 @@
-{ lib, options, ... }: with lib;
+{ lib}: with lib;
 {
 		hostname = mkOption {
 			type = types.str;
