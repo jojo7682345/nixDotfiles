@@ -4,6 +4,7 @@
 	environment.systemPackages = with pkgs; [
 		wget
 		git
+		vim
 	];
 
 	i18n.defaultLocale = "en_US.UTF-8";
