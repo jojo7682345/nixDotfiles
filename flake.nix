@@ -12,15 +12,13 @@
 			machine = (nixpkgs.lib.evalModules {
 				modules = [./systems/${filename}/default.nix];
 			}).config.system;
-			systemStats = (import ./util/systemStats.nix { inherit machine; inherit (nixpkgs) lib; });
-			users = (map (user: ./home/${user.name}) machine.users);
-		
+			systemStats = (import ./util/systemStats.nix { inherit machine; inherit (nixpkgs) lib; });	
 		in {
 			name = nixpkgs.lib.strings.removeSuffix ".nix" filename;
 			value = nixpkgs.lib.nixosSystem {
 				system = "${machine.hardware.cpu.architecture}-linux";
 				specialArgs = { inherit machine; inherit systemStats; };
-				modules = [ ./settings/system ] ++ users;
+				modules = [ ./settings/system ];
 			};
 		}) hostDirs);
 	in {
