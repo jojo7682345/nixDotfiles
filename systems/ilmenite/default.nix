@@ -1,6 +1,6 @@
 {config, lib, pkgs, ... }: { 
 	imports = [
-		../../options/hardware-store.nix
+		../../options
 	];
 	
 	config.system = {
