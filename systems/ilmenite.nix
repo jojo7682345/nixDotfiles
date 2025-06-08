@@ -57,12 +57,12 @@
 					sizeGiB = 1;
 					mountPoint = "/boot";
 					uid = "81F1-1275"; 			
+					options = [ "fmask=0077" "dmask=0077" ];
 				} {
 					fileSystem = "ext4";
 					sizeGiB = 2039;
 					mountPoint = "/";
 					uid = "e739f244-cbb3-4c07-9290-6ccd8c8db809";
-					options = [ "fmask=0077" "dmask=0077" ];
 				} {
 					type = "swap";
 					sizeGiB = 8;
