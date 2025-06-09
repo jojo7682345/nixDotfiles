@@ -24,7 +24,9 @@
 				modules = [ 
 					./settings/system 
 					inputs.home-manager.nixosModules.home-manager
+					./settings/home-manager
 				];
+				
 			};
 		}) hostDirs);
 	in {
