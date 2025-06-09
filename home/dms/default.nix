@@ -13,7 +13,7 @@
 				enable = true;
 				custom = "${config.home.homeDirectory}/.config/zsh/custom";
 				theme = "robbyrussel";
-				plugins = [ "git" "sudo" ];
+				plugins = [ "git" "sudo" "copypath" "copyfile" "jsontools" ];
 			};
 			shellAliases = {
 				ls = "ls -l --color=auto";
@@ -21,6 +21,8 @@
 				la = "ls -la --color=auto";
 				grep = "grep --color=auto";
 				update = "sudo nixos-rebuild switch --flake /home/dms/.config/nixos";
+				poweroff = "systemctl poweroff";
+				reboot = "systemctl reboot";
 			};
 		};
 		git = {
