@@ -22,9 +22,9 @@
 					home-manager = inputs.home-manager;
 				};
 				modules = [ 
-					./settings/system 
 					inputs.home-manager.nixosModules.home-manager
 					./settings/home-manager
+					./settings/system 
 				];
 				
 			};

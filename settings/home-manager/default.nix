@@ -1,6 +1,6 @@
 { lib, self, config, inputs, machine, systemStats, ... }: {
 
-	config.home-manager = {
+	home-manager = {
 		verbose = true;
 		useUserPackages = true;
 		useGlobalPkgs = true;
