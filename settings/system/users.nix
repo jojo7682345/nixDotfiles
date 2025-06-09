@@ -1,5 +1,6 @@
 { 
 	lib,
+	pkgs,
 	self,
 	config,
 	inputs,
@@ -15,6 +16,7 @@ in
 		name = user.name;
 		value = {
 			isNormalUser = true;
+			shell = if user.defaultShell =="zsh" then pkgs.zsh else pkgs.bash;
 			extraGroups = [] ++ 
 				(lib.optionals (
 					user.hasNetworkAccess && machine.os.network.enableTui  
@@ -38,6 +40,7 @@ in
 					(lib.pathExists (self + "/home/${user.name}/default.nix")) 
 					[ (self + "/home/${user.name}") ]
 				);
+				programs.zsh.enable = user.defaultShell == "zsh";
 				home.stateVersion = "25.05";
 				home.username = user.name;
 				home.homeDirectory = "/home/${user.name}";

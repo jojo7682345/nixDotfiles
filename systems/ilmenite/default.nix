@@ -14,6 +14,7 @@
 			name = "dms";
 			hasNetworkAccess = true;
 			isAdmin = true;
+			defaultShell = "zsh";
 		}];	
 	};
 }

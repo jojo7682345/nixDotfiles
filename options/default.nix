@@ -20,6 +20,10 @@
 					type = types.bool;
 					default = false;
 				};
+				defaultShell = mkOption {
+					type = types.enum [ "bash" "zsh" ];
+					default = "bash";
+				};
 	
 			};});
 			default = [];
