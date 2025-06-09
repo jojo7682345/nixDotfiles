@@ -13,4 +13,5 @@
 				) ["wheel"]);
 		};
 	}) machine.users);
+	programs.zsh.enable = (lib.any (user: user.defaultShell == "zsh") machine.users);
 }
