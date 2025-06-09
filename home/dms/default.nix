@@ -4,8 +4,11 @@
 	programs = {
 		zsh = {
 			enable = true;
+			autosuggestions.enable = true;
+			syntaxHighlighting.enable = true;
 			oh-my-zsh = {
 				enable = true;
+				theme = "robbyrussel";
 				plugins = [ "git" "sudo" ];
 			};
 		};
