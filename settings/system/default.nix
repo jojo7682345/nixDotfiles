@@ -8,6 +8,7 @@
 		./system.nix
 		./nix.nix
 		./users.nix
+		./login.nix
 	];
 	nixpkgs.hostPlatform = lib.mkDefault "${machine.hardware.cpu.architecture}-linux";
 	system.stateVersion = "25.05";

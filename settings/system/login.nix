@@ -6,8 +6,8 @@
 		restart = true;
 		settings = {
 			default_session = {
-				command = lib.concatStringSep " " [
-					(lib.getExe pkg.greetd tuigreet)
+				command = lib.concatStringsSep " " [
+					(lib.getExe pkgs.greetd.tuigreet)
 					"--time"
 					"--remember"
 					"--remember-user-session"
