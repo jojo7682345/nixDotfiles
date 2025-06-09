@@ -10,8 +10,16 @@
 				
 				name = mkOption {
 					type = types.str;
-					required = true;
-				};				
+				};
+				
+				hasNetworkAccess = mkOption {
+					type = types.bool;
+					default = false;
+				};
+				isAdmin = mkOption {
+					type = types.bool;
+					default = false;
+				};
 	
 			};});
 			default = [];

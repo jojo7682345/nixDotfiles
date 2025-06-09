@@ -10,5 +10,10 @@
 		hardware = {
 		
 		} // import ./hardware.nix;
+		users = [{
+			name = "dms";
+			hasNetworkAccess = true;
+			isAdmin = true;
+		}];	
 	};
 }

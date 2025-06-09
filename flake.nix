@@ -18,7 +18,7 @@
 			value = nixpkgs.lib.nixosSystem {
 				system = "${machine.hardware.cpu.architecture}-linux";
 				specialArgs = { 
-					inherit inputs machine systemStats; 
+					inherit inputs machine self systemStats; 
 					home-manager = inputs.home-manager;
 				};
 				modules = [ 

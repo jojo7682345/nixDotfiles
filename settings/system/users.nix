@@ -5,29 +5,27 @@
 	inputs,
 	machine,
 	systemStats,	
-#	home-manager,	
 	... 
 }:
 let 
 	inherit (lib) genAttrs;
 in
 {
-	users.users = builtins.listToAttrs (map (user: {
+	config.users.users = builtins.listToAttrs (map (user: {
 		name = user.name;
 		value = {
 			isNormalUser = true;
 			extraGroups = [] ++ 
 				(lib.optionals (
 					user.hasNetworkAccess && machine.os.network.enableTui  
-				) "networkmanager") ++
+				) ["networkmanager"]) ++
 				(lib.optionals (
 					user.isAdmin
-				) "wheel");
+				) ["wheel"]);
 		};
 	}) machine.users);
 
-	config.home-manager.enable = true;
-	home-manager = {
+	config.home-manager = {
 		verbose = true;
 		useUserPackages = true;
 		useGlobalPkgs = true;
@@ -37,7 +35,7 @@ in
 			name = user.name;
 			value = {
 				imports = (lib.optionals
-					(lib.fileExists (self + "/home/${user.name}")) 
+					(lib.pathExists (self + "/home/${user.name}/default.nix")) 
 					[ (self + "/home/${user.name}") ]
 				);
 				home.stateVersion = "25.05";
