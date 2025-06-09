@@ -5,7 +5,7 @@
 	inputs,
 	machine,
 	systemStats,	
-	home-manager,
+#	home-manager,	
 	... 
 }:
 let 
@@ -25,6 +25,8 @@ in
 				) "wheel");
 		};
 	}) machine.users);
+
+	config.home-manager.enable = true;
 	home-manager = {
 		verbose = true;
 		useUserPackages = true;
@@ -35,8 +37,8 @@ in
 			name = user.name;
 			value = {
 				imports = (lib.optionals
-					(lib.fileExists "${self}/home/${user.name}") 
-					[ "${self}/home/${user.name}" ]
+					(lib.fileExists (self + "/home/${user.name}")) 
+					[ (self + "/home/${user.name}") ]
 				);
 				home.stateVersion = "25.05";
 				home.username = user.name;
@@ -49,8 +51,7 @@ in
 				self
 				inputs
 				machine
-				systemStats
-			;
+				systemStats;
 		};
 	};
 }

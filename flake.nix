@@ -17,8 +17,14 @@
 			name = nixpkgs.lib.strings.removeSuffix ".nix" filename;
 			value = nixpkgs.lib.nixosSystem {
 				system = "${machine.hardware.cpu.architecture}-linux";
-				specialArgs = { inherit inputs machine systemStats; };
-				modules = [ ./settings/system ];
+				specialArgs = { 
+					inherit inputs machine systemStats; 
+					home-manager = inputs.home-manager;
+				};
+				modules = [ 
+					./settings/system 
+					inputs.home-manager.nixosModules.home-manager
+				];
 			};
 		}) hostDirs);
 	in {
