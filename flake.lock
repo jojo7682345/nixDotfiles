@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "avBuilder": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755295656,
+        "narHash": "sha256-bqysaWnRPyQeAQnqCRpZXfUTvJqHYgztlGY6Aige1aE=",
+        "owner": "jojo7682345",
+        "repo": "avBuilder",
+        "rev": "b5de9c9d5135451d3d5bc3d2e839f4132a5f4b2d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jojo7682345",
+        "repo": "avBuilder",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -77,6 +97,7 @@
     },
     "root": {
       "inputs": {
+        "avBuilder": "avBuilder",
         "home-manager": "home-manager",
         "lix": "lix",
         "nixpkgs": "nixpkgs"

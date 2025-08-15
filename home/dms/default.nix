@@ -1,6 +1,11 @@
 { inputs, machine, config, pkgs,  ... }:
 {
-	home.packages = with pkgs; [ git zsh ];
+	home.packages = with pkgs; [ 
+		git
+		zsh
+		libgcc
+		inputs.avBuilder.packages.x86_64-linux.avbuilder
+	];
 	programs = {
 		zsh = {
 			enable = true;
@@ -23,6 +28,7 @@
 				update = "sudo nixos-rebuild switch --flake /home/dms/.config/nixos";
 				poweroff = "systemctl poweroff";
 				reboot = "systemctl reboot";
+				nix-shell = "nix-shell --run $SHELL $@";
 			};
 		};
 		git = {

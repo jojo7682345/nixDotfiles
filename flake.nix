@@ -55,6 +55,12 @@
 			ref = "pull/4976/merge";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-
+		
+	avBuilder = {
+  			type = "github";
+  			owner = "jojo7682345";
+  			repo = "avBuilder";
+  			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 }
