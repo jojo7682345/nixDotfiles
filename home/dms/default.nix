@@ -3,8 +3,6 @@
 	home.packages = with pkgs; [ 
 		git
 		zsh
-		libgcc
-		inputs.avBuilder.packages.x86_64-linux.avbuilder
 	];
 	programs = {
 		zsh = {

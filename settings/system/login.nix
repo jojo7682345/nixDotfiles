@@ -2,7 +2,6 @@
 	
 	services.greetd = {
 		enable = true;
-		vt = 2;
 		restart = true;
 		settings = {
 			default_session = {
