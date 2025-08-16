@@ -9,9 +9,10 @@
 			enable = true;
 			enableCompletion = true;
 			syntaxHighlighting.enable = true;
-			enableAutosuggestions = true;
+			#enableAutosuggestions = true;
 			dotDir = ".config/zsh";
 			#programs.zsh.autosuggestion.enable = true;
+			autosuggestion.enable = true;
 			oh-my-zsh = {
 				enable = true;
 				custom = "${config.home.homeDirectory}/.config/zsh/custom";
@@ -28,6 +29,16 @@
 				reboot = "systemctl reboot";
 				nix-shell = "nix-shell --run $SHELL $@";
 			};
+			initContent = ''
+				nix() {
+					if [[ $1 == "develop" ]]; then
+						shift
+						command nix develop -c $SHELL "$@"
+					else
+						command nix "$@"
+					fi
+				}
+			'';
 		};
 		git = {
 			enable = true;
