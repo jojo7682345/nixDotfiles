@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: let
+	sessionData = config.services.displayManager.sessionData.desktops;
+	sessionPath = lib.concatStringsSep ":" [
+		"${sessionData}/share/xsessions"
+    	"${sessionData}/share/wayland-sessions"
+	];
+in {
 	
 	services.greetd = {
 		enable = true;
@@ -11,7 +17,7 @@
 					"--remember"
 					"--remember-user-session"
 					"--asterisks"
-					#"--session '${sessionPath}'"
+					"--session '${sessionPath}'"
 				];
 			};
 		};

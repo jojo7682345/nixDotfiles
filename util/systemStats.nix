@@ -13,7 +13,7 @@
 	};
 
 	displayCapabilities = let displays = machine.hardware.displays; in {
-		hasDisplay = (lib.count displays) > 0;
+		hasDisplay = displays != [];
 	};
 
 

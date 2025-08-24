@@ -1,5 +1,7 @@
-{ inputs, machine, config, pkgs,  ... }:
-{
+{ inputs, machine, config, pkgs,  ... } : {
+
+	imports = [ ./programs/hyprland ];
+
 	home.packages = with pkgs; [ 
 		git
 		zsh
@@ -9,9 +11,7 @@
 			enable = true;
 			enableCompletion = true;
 			syntaxHighlighting.enable = true;
-			#enableAutosuggestions = true;
 			dotDir = ".config/zsh";
-			#programs.zsh.autosuggestion.enable = true;
 			autosuggestion.enable = true;
 			oh-my-zsh = {
 				enable = true;
@@ -53,7 +53,7 @@
 		};
 		vscode = {
 			enable = true;
-			extensions = with pkgs.vscode-extensions; [
+			profiles.default.extensions = with pkgs.vscode-extensions; [
 				ms-vscode.cpptools
 				mkhl.direnv
 			];
@@ -61,6 +61,9 @@
 		direnv = {
 			enable = true;
 			nix-direnv.enable = true;
+		};
+		wayvnc = {
+			enable = true;
 		};
 	};
 	home.file.".config/zsh/custom/themes/robbyrussel.zsh-theme".source = builtins.fetchurl {
