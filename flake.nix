@@ -56,11 +56,8 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		
-	avBuilder = {
-  			type = "github";
-  			owner = "jojo7682345";
-  			repo = "avBuilder";
-  			inputs.nixpkgs.follows = "nixpkgs";
+		hyprland {
+			url = "github:hyprwm/Hyprland";
 		};
 	};
 }

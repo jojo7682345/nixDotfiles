@@ -51,6 +51,17 @@
 			viAlias = true;
 			vimAlias = true;
 		};
+		vscode = {
+			enable = true;
+			extensions = with pkgs.vscode-extensions; [
+				ms-vscode.cpptools
+				mkhl.direnv
+			];
+		};
+		direnv = {
+			enable = true;
+			nix-direnv.enable = true;
+		};
 	};
 	home.file.".config/zsh/custom/themes/robbyrussel.zsh-theme".source = builtins.fetchurl {
 		url = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/robbyrussell.zsh-theme";

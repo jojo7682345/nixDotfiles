@@ -12,5 +12,9 @@
 		hasCuda = (lib.any (gpu: gpu.enableCuda) gpu);
 	};
 
+	displayCapabilities = let displays = machine.hardware.displays; in {
+		hasDisplay = (lib.count displays) > 0;
+	};
+
 
 }
