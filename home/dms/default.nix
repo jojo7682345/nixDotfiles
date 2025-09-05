@@ -3,10 +3,13 @@
 	imports = [ ./programs/hyprland ];
 
 	home.packages = with pkgs; [ 
-		alacritty
 		mc
 		fzf
+		nerd-fonts.roboto-mono	
 	];
+
+	fonts.fontconfig.enable = true;
+
 	programs = {
 		zsh = {
 			enable = true;
@@ -69,6 +72,35 @@
 			options = [
 				"--cmd cd"
 			];
+		};
+		alacritty = {
+			enable = true;
+			settings = {
+				font = {
+					size = 12;
+					bold = {
+						family = "RobotoMono Nerd Font";
+						style = "Bold";
+					};
+					bold_italic = {
+						family = "RobotoMono Nerd Font";
+						style = "Bold Italic";
+					};
+					italic = {
+						family = "RobotoMono Nerd Font";
+						style = "Italic";
+					};
+					normal = {
+						family = "RobotoMono Nerd Font";
+						style = "Regular";
+					};
+				};
+				window = {
+					dynamic_title = true;
+					opacity = 0.8;
+					blur = true;
+				};
+			};
 		};
 	};
 	services = {
