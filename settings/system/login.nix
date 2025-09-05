@@ -17,7 +17,7 @@ in {
 					"--remember"
 					"--remember-user-session"
 					"--asterisks"
-					"--session '${sessionPath}'"
+					"--sessions '${sessionPath}'"
 				];
 			};
 		};

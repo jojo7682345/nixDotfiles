@@ -1,6 +1,6 @@
-{ lib, pkgs, inputs' config, ...} : {
+{ lib, pkgs, inputs', config, ...} : {
 
-	imports = [ ./config ]
+	imports = [ ./config ];
 
 	wayland.windowManager.hyprland = {
 		enable = true;

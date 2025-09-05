@@ -3,8 +3,9 @@
 	imports = [ ./programs/hyprland ];
 
 	home.packages = with pkgs; [ 
-		git
-		zsh
+		alacritty
+		mc
+		fzf
 	];
 	programs = {
 		zsh = {
@@ -62,10 +63,26 @@
 			enable = true;
 			nix-direnv.enable = true;
 		};
-		wayvnc = {
+		zoxide = {
 			enable = true;
+			enableZshIntegration = true;
+			options = [
+				"--cmd cd"
+			];
 		};
 	};
+	services = {
+		wayvnc = {
+			enable = true;
+			settings = {
+				address = "0.0.0.0";
+				port = 5900;
+			};
+		};
+
+	};
+
+
 	home.file.".config/zsh/custom/themes/robbyrussel.zsh-theme".source = builtins.fetchurl {
 		url = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/robbyrussell.zsh-theme";
 		sha256 = "b722bc9912c76619113bbfd76c4fc43984273dbd864ca8704e918e75d4dd9761";

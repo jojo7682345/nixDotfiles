@@ -6,4 +6,9 @@
 	} else {
 		enable = false;
 	};
+
+	xdg.portal.extraPortals = lib.mkForce [
+    	pkgs.xdg-desktop-portal-gtk
+    	inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+  	];
 }
