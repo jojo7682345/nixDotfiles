@@ -25,6 +25,20 @@
 				description = "Timezone";
 			};
 		};
+		input = {
+			rules = mkOption{
+				type = types.listOf (types.submodule {
+					name = {
+						type = types.str;
+						default = "";
+					};
+					content = {
+						type = types.str;
+						default = "";
+				});
+				default = [];
+			};
+		};
 		network = {
 			useDHCP = mkOption {
 				type = types.bool;

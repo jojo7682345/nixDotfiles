@@ -4,7 +4,7 @@
 		value = {
 			isNormalUser = true;
 			shell = if user.defaultShell =="zsh" then pkgs.zsh else pkgs.bash;
-			extraGroups = [] ++ 
+			extraGroups = user.additionalGroups ++ 
 				(lib.optionals (
 					user.hasNetworkAccess && machine.os.network.enableTui  
 				) ["networkmanager"]) ++

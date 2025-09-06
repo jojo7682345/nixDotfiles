@@ -15,6 +15,9 @@
 			hasNetworkAccess = true;
 			isAdmin = true;
 			defaultShell = "zsh";
+			additionalGroups = [
+				"input"
+			];
 		}];	
 	};
 }

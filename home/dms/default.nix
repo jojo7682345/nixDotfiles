@@ -5,7 +5,9 @@
 	home.packages = with pkgs; [ 
 		mc
 		fzf
-		nerd-fonts.roboto-mono	
+		nerd-fonts.roboto-mono
+		unzip
+		firefox
 	];
 
 	fonts.fontconfig.enable = true;
@@ -111,7 +113,6 @@
 				port = 5900;
 			};
 		};
-
 	};
 
 

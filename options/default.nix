@@ -24,6 +24,10 @@
 					type = types.enum [ "bash" "zsh" ];
 					default = "bash";
 				};
+				additionalGroups = mkOption {
+					type = types.listOf(types.str);
+					default = [];
+				};
 	
 			};});
 			default = [];
