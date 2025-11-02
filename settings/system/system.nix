@@ -9,5 +9,10 @@
 
 	i18n.defaultLocale = "en_US.UTF-8";
 
-	programs.nix-ld.enable = true;
+	programs.nix-ld = {
+		enable = true;
+		libraries = with pkgs; [
+			stdenv.cc.cc
+		];
+	};
 }

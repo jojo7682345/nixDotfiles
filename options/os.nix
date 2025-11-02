@@ -26,17 +26,13 @@
 			};
 		};
 		input = {
-			rules = mkOption{
-				type = types.listOf (types.submodule {
-					name = {
-						type = types.str;
-						default = "";
-					};
-					content = {
-						type = types.str;
-						default = "";
-				});
+		rules = mkOption {
+				type = types.listOf (types.attrsOf types.str); # simple attribute sets
 				default = [];
+				example = [
+					{ name = "99-rule1.rules"; content = "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"1234\", MODE=\"0660\""; }
+					{ name = "99-rule2.rules"; content = "SUBSYSTEM==\"usb\", ATTR{idVendor}==\"abcd\", MODE=\"0666\""; }
+				];
 			};
 		};
 		network = {

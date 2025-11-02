@@ -52,12 +52,15 @@
 			type = "github";
 			owner = "nix-community";
 			repo = "home-manager";
-			ref = "pull/4976/merge";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		
 		hyprland = {
 			url = "github:hyprwm/Hyprland";
+		};
+
+		flakeTemplates = {
+			url = "github:jojo7682345/flakeTemplates";
 		};
 	};
 }

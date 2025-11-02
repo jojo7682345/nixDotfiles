@@ -38,7 +38,7 @@ keymaps.normal['<F5>'] = {
 	function()
     	-- (Re-)reads launch.json if present
         if vim.fn.filereadable(".vscode/launch.json") then
-            require("dap.ext.vscode").load_launchjs(nil, { cpptools = { "c", "cpp" } })
+            require("dap.ext.vscode").load_launchjs(nil, { cppdbg = { "c", "cpp" }, cpptools="cppdbg" })
         end
         require("dap").continue()
     end,

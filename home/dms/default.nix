@@ -1,4 +1,8 @@
-{ inputs, machine, config, pkgs,  ... } : {
+{ inputs, machine, config, pkgs,  ... } : let
+
+	flakeTemplates = inputs.flakeTemplates.packages.${pkgs.system}.default;
+
+in {
 
 	imports = [ ./programs/hyprland ];
 
@@ -44,6 +48,7 @@
 						command nix "$@"
 					fi
 				}
+				source ${flakeTemplates}/share/flakeTemplates/develop.sh
 			'';
 		};
 		git = {
@@ -56,6 +61,9 @@
 			defaultEditor = true;
 			viAlias = true;
 			vimAlias = true;
+			extraPackages = with pkgs; [
+				ripgrep
+			];
 		};
 		vscode = {
 			enable = true;
