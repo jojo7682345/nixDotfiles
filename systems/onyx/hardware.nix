@@ -17,7 +17,7 @@
 		vramMiB = 8188;
 		headless = false;
 		enableCUDA = true;
-	},{
+	} {
 		vendor = "amd";
 		model = "Raphael";
 		headless = false;
@@ -36,7 +36,7 @@
 		sizeGiB = 4096;
 		partitions = [{
 			type = "boot";
-			fileSystem = "fat32";
+			fileSystem = "vfat";
 			sizeGiB = 1;
 			mountPoint = "/boot";
 			uid = "709D-2300"; 			
@@ -45,13 +45,11 @@
 			fileSystem = "ext4";
 			sizeGiB = 528;
 			mountPoint = "/";
-			uid = "db7fcfe5-3ee9-46a8-9a1f-7b9586361819";
+			uid = "931da18a-4d1c-416f-aadf-f384825f3e82";
 		} {
 			type = "swap";
 			sizeGiB = 16;
 			uid = "63d13911-8607-4114-9ccd-38c5f1a44f13";
 		}];
-	},{
-		
 	}];
 }

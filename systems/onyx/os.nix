@@ -1,7 +1,7 @@
 {
 	bootloader = {
 		loader = "systemd";
-		canTouchEfiVariables = false;
+		canTouchEfiVariables = true;
 	};
 	network = {
 		enableWifi = true;
