@@ -12,6 +12,7 @@ in {
 		nerd-fonts.roboto-mono
 		unzip
 		firefox
+		kdePackages.dolphin
 	];
 
 	fonts.fontconfig.enable = true;
@@ -53,8 +54,12 @@ in {
 		};
 		git = {
 			enable = true;
-			userEmail = "jojo7682345@gmail.com";
-			userName = "jojo7682345";
+			settings = {
+				user = {
+					email = "jojo7682345@gmail.com";
+					name = "jojo7682345";
+				};
+			};
 		};
 		neovim = {
 			enable = true;
@@ -128,5 +133,6 @@ in {
 		url = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/robbyrussell.zsh-theme";
 		sha256 = "b722bc9912c76619113bbfd76c4fc43984273dbd864ca8704e918e75d4dd9761";
 	};
-	home.file.".config/nvim".source = ./programs/nvim;
+	#home.file.".config/nvim".source = ./programs/nvim;
+	home.file.".config/hypr".source = ./programs/hyprland/config;
 }

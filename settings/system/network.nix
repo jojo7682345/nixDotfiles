@@ -3,7 +3,7 @@
 	networking = {
 		hostName = machine.os.hostname;
 		useDHCP = lib.mkDefault machine.os.network.useDHCP;
-		wireless.enable = machine.hardware.misc.hasWifi&&machine.os.network.enableWifi&&!machine.os.network.enableTui;
+		#wireless.enable = machine.hardware.misc.hasWifi&&machine.os.network.enableWifi&&!machine.os.network.enableTui;
 		networkmanager.enable = machine.os.network.enableTui;
 
 		firewall = {

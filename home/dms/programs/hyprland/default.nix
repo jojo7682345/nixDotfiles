@@ -1,11 +1,9 @@
 { lib, pkgs, inputs', config, ...} : {
 
-	imports = [ ./config ];
-
 	wayland.windowManager.hyprland = {
 		enable = true;
 		xwayland.enable = true;
-
+		configType = "lua";
 		systemd = {
 			enable = true;
 			variables = [ "--all" ];
