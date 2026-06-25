@@ -22,6 +22,6 @@
 	boot.initrd.kernelModules = [];
 
 	boot.kernelModules = [] ++
-		(lib.optionals hardware.cpu.allowVirtualization ["kvm-intel"]);
+		(lib.optionals hardware.cpu.allowVirtualization ["kvm-${machine.hardware.cpu.vendor}"]);
 	boot.extraModulePackages = [];
 }
