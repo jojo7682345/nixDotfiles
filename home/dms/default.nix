@@ -1,7 +1,7 @@
 { inputs, machine, config, pkgs,  ... } : let
 
 	flakeTemplates = inputs.flakeTemplates.packages.${pkgs.system}.default;
-
+	dotfiles = "${config.home.homeDirectory}/.config/nixos";
 in {
 
 	imports = [ ./programs/hyprland ];
@@ -13,6 +13,7 @@ in {
 		unzip
 		firefox
 		kdePackages.dolphin
+		wdisplays
 	];
 
 	fonts.fontconfig.enable = true;
@@ -22,7 +23,7 @@ in {
 			enable = true;
 			enableCompletion = true;
 			syntaxHighlighting.enable = true;
-			dotDir = ".config/zsh";
+			dotDir = "${config.xdg.configHome}/zsh";
 			autosuggestion.enable = true;
 			oh-my-zsh = {
 				enable = true;
@@ -69,12 +70,15 @@ in {
 			extraPackages = with pkgs; [
 				ripgrep
 			];
+			withPython3 = false;
+			withRuby = false;
 		};
 		vscode = {
 			enable = true;
 			profiles.default.extensions = with pkgs.vscode-extensions; [
 				ms-vscode.cpptools
 				mkhl.direnv
+				bbenoist.nix
 			];
 		};
 		direnv = {
@@ -133,6 +137,6 @@ in {
 		url = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/robbyrussell.zsh-theme";
 		sha256 = "b722bc9912c76619113bbfd76c4fc43984273dbd864ca8704e918e75d4dd9761";
 	};
-	#home.file.".config/nvim".source = ./programs/nvim;
-	home.file.".config/hypr".source = ./programs/hyprland/config;
+	xdg.configFile."nvim".source = ./programs/nvim;
+	#xdg.configFile."hypr".source = ./programs/hyprland/config;
 }

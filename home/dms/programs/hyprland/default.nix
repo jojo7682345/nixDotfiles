@@ -12,5 +12,8 @@
 				"systemctl --user start hyprland-session.target"
 			];
 		};
+		extraLuaFiles = {
+			config = ./config/loader.lua;
+		};
 	};
 }

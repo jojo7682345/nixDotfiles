@@ -1,13 +1,14 @@
 
 hl.monitor({
-    output = "",
-    mode = "preferred",
+    output = "eDP-1",
+    mode = "2560x1440@240",
     position = "auto",
-    scale = "auto",
+    scale = "1.25",
 })
 
 local terminal = "alacritty"
 local fileManager = "dolphin"
+local browser = "firefox"
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
@@ -107,6 +108,9 @@ hl.config({
         force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
     },
+    cursor = {
+        no_hardware_cursors = true,
+    },
 })
 
 hl.config({
@@ -137,6 +141,9 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
+
 
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
