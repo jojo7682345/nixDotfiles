@@ -50,6 +50,21 @@
 			type = "swap";
 			sizeGiB = 16;
 			uid = "63d13911-8607-4114-9ccd-38c5f1a44f13";
+		} {
+			fileSystem = "ext4";
+			sizeGiB = 4096;
+			mountPoint = "/win/arch";
+			uid = "6eb46c7d-78ed-4da2-8d84-328a8a1c6c81";
+		} {
+			fileSystem = "ext4";
+			sizeGiB = 32;
+			mountPoint = "/win/arch/home";
+			uid = "d5f59441-22fb-4513-b655-9cf4648fe748";
+		} {
+			fileSystem = "ntfs";
+			sizeGiB = 1024;
+			mountPoint = "/win/shared";
+			uid = "4EDAB175DAB159C3";
 		}];
 	}];
 }

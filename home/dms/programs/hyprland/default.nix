@@ -1,4 +1,23 @@
-{ lib, pkgs, inputs', config, ...} : {
+{ lib, pkgs, inputs', config, ...} : let
+	hyprConfigDir = ./config;
+	hyprLuaFiles = builtins.readDir hyprConfigDir;
+
+	hyprConfigFiles = lib.mapAttrs'
+		(name: type:
+			lib.nameValuePair "hypr/${name}"{
+				source = hyprConfigDir + "/${name}";
+			}
+		)
+		(lib.filterAttrs
+			(name: type:
+				type == "regular" 
+				&& lib.hasSuffix ".lua" name
+				&& name != "config.lua"
+				&& name != "loader.lua"
+			)
+			hyprLuaFiles
+		);
+in {
 
 	wayland.windowManager.hyprland = {
 		enable = true;
@@ -12,5 +31,10 @@
 				"systemctl --user start hyprland-session.target"
 			];
 		};
+		extraLuaFiles = {
+			config = ./config/loader.lua;
+		};
 	};
+
+	xdg.configFile = hyprConfigFiles;
 }

@@ -4,6 +4,8 @@
 	];
 	
 	config.system = {
+		name = "ilmenite";
+		
 		os = {
 			hostname = "ilmenite";
 		} // import ./os.nix;

@@ -7,7 +7,10 @@
 	];
 
 	boot.loader = {
-		systemd-boot.enable = os.bootloader.loader == "systemd";
+		systemd-boot = {
+			enable = os.bootloader.loader == "systemd";
+			configurationLimit = 3;
+		};
 		efi.canTouchEfiVariables = os.bootloader.canTouchEfiVariables;
 	};
 

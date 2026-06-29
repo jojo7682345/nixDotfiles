@@ -62,5 +62,12 @@
 		flakeTemplates = {
 			url = "github:jojo7682345/flakeTemplates";
 		};
+
+		elephant.url = "github:abenz1267/elephant";
+
+		walker = {
+			url = "github:abenz1267/walker";
+			inputs.elephant.follows = "elephant";
+		};
 	};
 }

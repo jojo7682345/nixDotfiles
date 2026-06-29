@@ -23,4 +23,6 @@ in {
 		};
 	};
 
+	security.polkit.enable = true;
+
 }

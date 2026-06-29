@@ -4,6 +4,8 @@
 	];
 	
 	config.system = {
+		name = "onyx";
+
 		os = {
 			hostname = "onyx";
 		} // import ./os.nix;

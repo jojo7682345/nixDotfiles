@@ -4,6 +4,9 @@
 		os = (import ./os.nix { inherit lib; });
 		hardware = (import ./hardware.nix { inherit lib; });	
 		
+		name = mkOption {
+			type = types.str;
+		};
 
 		users = mkOption {
 			type = types.listOf( types.submodule { options = {

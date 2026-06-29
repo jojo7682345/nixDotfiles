@@ -1,10 +1,19 @@
 { inputs, machine, config, pkgs,  ... } : let
 
 	flakeTemplates = inputs.flakeTemplates.packages.${pkgs.system}.default;
+	dotfiles = "${config.home.homeDirectory}/.config/nixos";
 
+	viratheme = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+		name = "vsc-material-theme-but-i-wont-sue-you";
+		publisher = "t3dotgg";
+		version = "35.0.3";
+		sha256 = "sha256-RTYB1xQF7qQCc7znUrUB4PkKlXF1yvgrECrZbNV7JEA=";
+	};
 in {
 
-	imports = [ ./programs/hyprland ];
+	imports = [ 
+		./programs
+	];
 
 	home.packages = with pkgs; [ 
 		mc
@@ -13,7 +22,53 @@ in {
 		unzip
 		firefox
 		kdePackages.dolphin
+		thunar
+		wdisplays
+		clang-tools
+		btop
+		wofi
+		spotify
+		jdk
+		openjdk
+  		jetbrains.idea
+		awww
+		ranger
+		kicad
 	];
+
+	home.pointerCursor = {
+		gtk.enable = true;
+		# x11.enable = true;
+		package = pkgs.bibata-cursors;
+		name = "Bibata-Modern-Classic";
+		size = 16;
+	};
+
+
+	xdg.mimeApps = {
+		enable = true;
+		defaultApplications = {
+			"inode/directory" = "thunar.desktop";
+		};
+	};
+	gtk = {
+		enable = true;
+		theme = {
+			package = pkgs.flat-remix-gtk;
+			name = "Flat-Remix-GTK-Grey-Darkest";
+		};
+
+		iconTheme = {
+			package = pkgs.adwaita-icon-theme;
+			name = "Adwaita";
+		};
+		gtk4.theme = null;
+
+		font = {
+			name = "Sans";
+			size = 11;
+		};
+	};
 
 	fonts.fontconfig.enable = true;
 
@@ -22,7 +77,7 @@ in {
 			enable = true;
 			enableCompletion = true;
 			syntaxHighlighting.enable = true;
-			dotDir = ".config/zsh";
+			dotDir = "${config.xdg.configHome}/zsh";
 			autosuggestion.enable = true;
 			oh-my-zsh = {
 				enable = true;
@@ -35,7 +90,7 @@ in {
 				sl= "sl -e";
 				la = "ls -la --color=auto";
 				grep = "grep --color=auto";
-				update = "sudo nixos-rebuild switch --flake /home/dms/.config/nixos";
+				update = "sudo nixos-rebuild switch --flake /home/dms/.config/nixos#${machine.name}";
 				poweroff = "systemctl poweroff";
 				reboot = "systemctl reboot";
 				nix-shell = "nix-shell --run $SHELL $@";
@@ -69,12 +124,19 @@ in {
 			extraPackages = with pkgs; [
 				ripgrep
 			];
+			withPython3 = false;
+			withRuby = false;
 		};
 		vscode = {
 			enable = true;
 			profiles.default.extensions = with pkgs.vscode-extensions; [
 				ms-vscode.cpptools
 				mkhl.direnv
+				bbenoist.nix
+				llvm-vs-code-extensions.vscode-clangd
+				pkief.material-icon-theme
+			] ++ [
+				viratheme
 			];
 		};
 		direnv = {
@@ -119,13 +181,13 @@ in {
 		};
 	};
 	services = {
-		wayvnc = {
-			enable = true;
-			settings = {
-				address = "0.0.0.0";
-				port = 5900;
-			};
-		};
+		# wayvnc = {
+		# 	enable = true;
+		# 	settings = {
+		# 		address = "0.0.0.0";
+		# 		port = 5900;
+		# 	};
+		# };
 	};
 
 
@@ -133,6 +195,8 @@ in {
 		url = "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/themes/robbyrussell.zsh-theme";
 		sha256 = "b722bc9912c76619113bbfd76c4fc43984273dbd864ca8704e918e75d4dd9761";
 	};
-	#home.file.".config/nvim".source = ./programs/nvim;
-	home.file.".config/hypr".source = ./programs/hyprland/config;
+	xdg.configFile."nvim".source = ./programs/nvim;
+
+	home.file."docs".source = config.lib.file.mkOutOfStoreSymlink "/win/shared/docs";
+	#xdg.configFile."hypr".source = ./programs/hyprland/config;
 }
