@@ -13,6 +13,7 @@ in {
 
 	imports = [ 
 		./programs
+		./updating.nix
 	];
 
 	home.packages = with pkgs; [ 
@@ -26,7 +27,6 @@ in {
 		wdisplays
 		clang-tools
 		btop
-		wofi
 		spotify
 		jdk
 		openjdk
