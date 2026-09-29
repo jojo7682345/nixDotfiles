@@ -1,6 +1,6 @@
 { inputs, machine, config, pkgs,  ... } : let
 
-	flakeTemplates = inputs.flakeTemplates.packages.${pkgs.system}.default;
+	flakeTemplates = inputs.flakeTemplates.packages.${pkgs.stdenv.hostPlatform.system}.default;
 	dotfiles = "${config.home.homeDirectory}/.config/nixos";
 
 	viratheme = pkgs.vscode-utils.extensionFromVscodeMarketplace {
@@ -17,7 +17,6 @@ in {
 	];
 
 	home.packages = with pkgs; [ 
-		mc
 		fzf
 		nerd-fonts.roboto-mono
 		unzip
@@ -34,6 +33,7 @@ in {
 		awww
 		ranger
 		kicad
+		tor-browser
 	];
 
 	home.pointerCursor = {
