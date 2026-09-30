@@ -36,5 +36,29 @@
 			default = [];
 			description = "List of users";
 		};
+
+		steam = {
+			enable = mkOption {
+				type = types.bool;
+				default = false;
+			};
+		};
+		navidrome = {
+			enable = mkOption {
+				type = types.bool;
+				default = false;
+			};
+			musicFolder = mkOption {
+				type = types.str;
+			};
+			address = mkOption {
+				type = types.str;
+				default = "127.0.0.1";
+			};
+			port = mkOption {
+				type = types.ints.u16;
+				default = 4533;
+			};
+		};
 	};
 }

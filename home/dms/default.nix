@@ -34,7 +34,45 @@ in {
 		ranger
 		kicad
 		tor-browser
-	];
+		feishin
+		mpv
+		playerctl
+	] ++ [
+        (pkgs.writeShellApplication {
+            name = "power-menu";
+
+            runtimeInputs = with pkgs; [
+                systemd
+                walker
+            ];
+
+            text = ''
+                choice="$(
+                    printf '%s\n' \
+                        '󰐥  Shutdown' \
+                        '󰜉  Restart' \
+                        '󰒲  Suspend' \
+                        '󰍃  Logout' |
+                    walker --dmenu
+                )"
+
+                case "$choice" in
+                    '󰐥  Shutdown')
+                        systemctl poweroff
+                        ;;
+                    '󰜉  Restart')
+                        systemctl reboot
+                        ;;
+                    '󰒲  Suspend')
+                        systemctl suspend
+                        ;;
+                    '󰍃  Logout')
+                        hyprctl dispatch exit
+                        ;;
+                esac
+            '';
+        })
+    ];
 
 	home.pointerCursor = {
 		gtk.enable = true;
@@ -68,6 +106,16 @@ in {
 			name = "Sans";
 			size = 11;
 		};
+	};
+	
+	xdg.desktopEntries.feishin = {
+		name = "Feishin";
+		genericName = "Music player";
+		exec = "/etc/profiles/per-user/dms/bin/feishin";
+		terminal = false;
+		type = "Application";
+		categories = [ "AudioVideo" "Audio" "Player" "Music" ];
+		comment = "A player for your self-hosted music server";
 	};
 
 	fonts.fontconfig.enable = true;
@@ -114,6 +162,11 @@ in {
 					email = "jojo7682345@gmail.com";
 					name = "jojo7682345";
 				};
+				init.defaultBranch = "main";
+				safe.directory = [
+					"/win/shared/docs/Advantix/AX3-Electrical"
+					"/win/shared/docs/Advantix/AX2_FIRMWARE"
+				];
 			};
 		};
 		neovim = {

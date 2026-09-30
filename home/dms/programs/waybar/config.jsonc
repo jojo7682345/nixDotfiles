@@ -9,13 +9,14 @@
 
     "modules-left": [
         "clock",
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "mpris"
     ],
 
     "modules-center": [
         "hyprland/window"
     ],
-
+    
     "modules-right": [
         "cpu",
         "memory",
@@ -93,5 +94,23 @@
     "clock": {
         "format": "󰥔  {:%H:%M}",
         "tooltip-format": "{:%A, %d %B %Y}"
+    },
+
+    "mpris": {
+        "format": "{status_icon} {title} - {artist}",
+        "format-paused": "{status_icon} {title} - {artist}",
+        "status-icons": {
+            "playing": "󰐊",
+            "paused": "󰏤",
+            "stopped": "󰓛"
+        },
+        "max-length": 35,
+
+        "on-click": "playerctl play-pause",
+        "on-click-middle": "playerctl next",
+        "on-click-right": "playerctl previous",
+
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous"
     }
 }

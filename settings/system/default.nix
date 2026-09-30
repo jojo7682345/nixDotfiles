@@ -12,7 +12,8 @@
 		./displayManager.nix
 		./input.nix
 		./bluetooth.nix
-		./steam.nix
+		./gpu.nix
+		./programs
 	];
 	nixpkgs.hostPlatform = lib.mkDefault "${machine.hardware.cpu.architecture}-linux";
 	system.stateVersion = "25.05";

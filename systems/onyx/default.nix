@@ -21,5 +21,12 @@
 				"input"
 			];
 		}];	
+
+		steam.enable = true;
+		navidrome = {
+			enable = true;
+			musicFolder = "/srv/music/";
+			address = "0.0.0.0";
+		};
 	};
 }
