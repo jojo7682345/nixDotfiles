@@ -37,6 +37,7 @@ in {
 		feishin
 		mpv
 		playerctl
+		gnome-calculator
 	] ++ [
         (pkgs.writeShellApplication {
             name = "power-menu";
@@ -83,12 +84,7 @@ in {
 	};
 
 
-	xdg.mimeApps = {
-		enable = true;
-		defaultApplications = {
-			"inode/directory" = "thunar.desktop";
-		};
-	};
+	
 	gtk = {
 		enable = true;
 		theme = {
@@ -108,14 +104,26 @@ in {
 		};
 	};
 	
-	xdg.desktopEntries.feishin = {
-		name = "Feishin";
-		genericName = "Music player";
-		exec = "/etc/profiles/per-user/dms/bin/feishin";
-		terminal = false;
-		type = "Application";
-		categories = [ "AudioVideo" "Audio" "Player" "Music" ];
-		comment = "A player for your self-hosted music server";
+	xdg = {
+		mimeApps = {
+			enable = true;
+			defaultApplications = {
+				"inode/directory" = "thunar.desktop";
+			};
+		};
+
+		desktopEntries = {
+
+			feishin = {
+				name = "Feishin";
+				genericName = "Music player";
+				exec = "/etc/profiles/per-user/dms/bin/feishin";
+				terminal = false;
+				type = "Application";
+				categories = [ "AudioVideo" "Audio" "Player" "Music" ];
+				comment = "A player for your self-hosted music server";
+			};
+		};
 	};
 
 	fonts.fontconfig.enable = true;
@@ -166,6 +174,8 @@ in {
 				safe.directory = [
 					"/win/shared/docs/Advantix/AX3-Electrical"
 					"/win/shared/docs/Advantix/AX2_FIRMWARE"
+					"/win/shared/usr/avVisualizer"
+					"/win"
 				];
 			};
 		};
