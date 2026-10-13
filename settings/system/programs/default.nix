@@ -3,5 +3,6 @@
 	imports = [] 
         ++ (lib.optionals ( machine.steam.enable ) [ ./steam.nix ])
         ++ (lib.optionals ( machine.navidrome.enable ) [ ./navidrome.nix ])
+        ++ (lib.optionals ( machine.samba.enable ) [ ./samba.nix ])
     ;
 }

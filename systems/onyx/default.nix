@@ -19,6 +19,7 @@
 			defaultShell = "zsh";
 			additionalGroups = [
 				"input"
+				"dialout"
 			];
 		}];	
 
@@ -27,6 +28,9 @@
 			enable = true;
 			musicFolder = "/srv/music/";
 			address = "0.0.0.0";
+		};
+		samba = {
+			enable = false;
 		};
 	};
 }

@@ -18,8 +18,10 @@
     ],
     
     "modules-right": [
+        "custom/power-profile",
         "cpu",
         "memory",
+        "temperature",
         "pulseaudio",
         "network",
         "battery"
@@ -112,5 +114,13 @@
 
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous"
+    },
+
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmonX/temp1_input",
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C",
+        "format-critical": " {temperatureC}°C",
+        "tooltip": true
     }
 }

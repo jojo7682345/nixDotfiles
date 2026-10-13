@@ -84,7 +84,9 @@ window#waybar {
 #pulseaudio,
 #network,
 #battery,
-#clock {
+#clock,
+#temperature,
+#custom-power-profile {
     padding: 0 8px;
     color: #cdd2dc;
 }
@@ -94,7 +96,9 @@ window#waybar {
 #pulseaudio:hover,
 #network:hover,
 #battery:hover,
-#clock:hover {
+#clock:hover,
+#temperature:hover,
+#custom-power-profile:hover {
     color: #33ccff;
 }
 
@@ -132,4 +136,22 @@ window#waybar {
     border: 1px solid rgba(89, 89, 89, 0.65);
     border-radius: 10px;
     color: #e6e9ef;
+}
+
+#custom-power-profile.power-saver {
+    color: #a6e3a1;
+}
+
+#custom-power-profile.balanced {
+    color: #89b4fa;
+}
+
+#custom-power-profile.performance {
+    color: #fab387;
+}
+
+
+
+#temperature.critical {
+    color: #f38ba8;
 }

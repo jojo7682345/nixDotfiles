@@ -7,11 +7,19 @@ hl.gesture({
     action = "workspace"
 })
 
+
+
 hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(launcher))
+
+local screenshot = "grim "
+local selectRegion = "-g \"$(slurp)\" - "
+local copyScreenshot = "| wl-copy"
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(screenshot .. copyScreenshot))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot .. selectRegion .. copyScreenshot))
 
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({mode = "fullscreen", action = "toggle"}))

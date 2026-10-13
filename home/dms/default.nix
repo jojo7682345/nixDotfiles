@@ -38,6 +38,13 @@ in {
 		mpv
 		playerctl
 		gnome-calculator
+		hyprlock
+		brightnessctl
+		grim
+		slurp
+		swappy
+		wl-clipboard
+		betaflight-configurator
 	] ++ [
         (pkgs.writeShellApplication {
             name = "power-menu";
@@ -262,4 +269,63 @@ in {
 
 	home.file."docs".source = config.lib.file.mkOutOfStoreSymlink "/win/shared/docs";
 	#xdg.configFile."hypr".source = ./programs/hyprland/config;
+
+
+	services = {
+		hypridle = {
+			enable = true;
+			settings = {
+				general = {
+					lock_cmd = "${pkgs.procps}/bin/pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+
+					before_sleep_cmd = "${pkgs.systemd}/bin/loginctl lock-session";
+					after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch 'hl.dsp.dpms({ action = \"on\"})'";
+
+					ignore_dbus_inhibit = false;
+					ignore_systemd_inhibit = false;
+				};
+				listener = [
+					{ # dim after 5 minutes
+						timeout = 300;
+						on-timeout = "${pkgs.brightnessctl}/bin/brightnessctl -s set 10%";
+						on-resume = "${pkgs.brightnessctl}/bin/brightnessctl -r";
+					}
+					{
+						timeout = 600;
+						on-timeout = "${pkgs.systemd}/bin/loginctl lock-session";
+					}
+					{
+						timeout = 900;
+						on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch 'hl.dsp.dpms({ action = \"off\"})'";
+						on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch 'hl.dsp.dpms({ action = \"on\"})'";
+
+					}
+				];
+			};
+		};
+	};
+
+	xdg.configFile."elephant/menus/powerprofile.toml".text = ''
+		name = "powerprofile"
+		name_pretty = "Power Profile"
+		icon = "preferences-system-power"
+
+		action = "${pkgs.power-profiles-daemon}/bin/powerprofilesctl set %VALUE%"
+
+		[[entries]]
+		text = "Power Saver"
+		value = "power-saver"
+		icon = "battery-low"
+
+		[[entries]]
+		text = "Balanced"
+		value = "balanced"
+		icon = "balance-scale"
+
+		[[entries]]
+		text = "Performance"
+		value = "performance"
+		icon = "speedometer"
+	'';
+
 }

@@ -60,5 +60,32 @@
 				default = 4533;
 			};
 		};
+		samba = {
+			enable = mkOption {
+				type = types.bool;
+				default = false;
+			};
+			credentialsDir = mkOption {
+				type = types.str;
+				default = "/etc/nixos/smb-secrets";
+			};
+			servers = mkOption {
+				type = types.listOf( types.submodule { options = {
+				
+				name = mkOption {
+					type = types.str;
+				};
+				
+				ip = mkOption {
+					type = type.str;
+				};
+				remotePath = mkOption {
+					type = type.str;
+				};
+				};});
+				default = [];
+				description = "List of users";
+			};
+		};
 	};
 }
