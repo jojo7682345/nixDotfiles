@@ -56,7 +56,7 @@
 		};
 		
 		hyprland = {
-			url = "github:hyprwm/Hyprland";
+			url = "github:jojo7682345/Hyprland";
 		};
 
 		flakeTemplates = {

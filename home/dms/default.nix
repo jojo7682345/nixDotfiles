@@ -45,6 +45,8 @@ in {
 		swappy
 		wl-clipboard
 		betaflight-configurator
+		eduvpn-client
+		libreoffice-qt
 	] ++ [
         (pkgs.writeShellApplication {
             name = "power-menu";
@@ -90,7 +92,25 @@ in {
 		size = 16;
 	};
 
+	programs.prismlauncher = {
+		enable = true;
+		# Optional: specify a custom package variant
+		# package = pkgs.prismlauncher; 
+		
+		# Configuration written to prismlauncher.cfg
+		settings = {
+		ShowConsole = true;
+		ConsoleMaxLines = 100000;
+		};
+	};
 
+	programs.obs-studio = {
+	enable = true;
+
+		plugins = with pkgs.obs-studio-plugins; [
+			obs-shaderfilter
+		];
+	};
 	
 	gtk = {
 		enable = true;
